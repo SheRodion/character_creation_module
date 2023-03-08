@@ -2,6 +2,59 @@ from random import randint
 
 from graphic_arts.start_game_banner import run_screensaver
 
+DEFAULT_ATTACK = 5
+DEFAULT_DEFENCE = 10
+DEFAULT_STAMINA = 80
+
+
+class Character:
+    BRIEF_DESC_CHAR_CLASS = 'отважный любитель приключений'
+    RANGE_VALUE_ATTACK = (1, 3)
+    RANGE_VALUE_DEFENCE = (1, 5)
+    SPECIAL_SKILL = 'Удача'
+    SPECIAL_BUFF = 15
+
+    def __init__(self, name):
+        self.name = name
+
+    def attack(self):
+        value_attack = DEFAULT_ATTACK + randint(*self.RANGE_VALUE_ATTACK)
+        return (f'{self.name} нанёс урон противнику равный {value_attack}')
+        """
+        if char_class == 'warrior':
+            return (
+                f'{char_name} нанёс урон противнику равный {5 + randint(3, 5)}')
+        if char_class == 'mage':
+            return (
+                f'{char_name} нанёс урон противнику равный {5 + randint(5, 10)}')
+        if char_class == 'healer':
+            return (
+                f'{char_name} нанёс урон противнику равный {5 + randint(-3, -1)}')
+        return (f'{char_name} не применил специальное умение')
+        """
+    def defence(self):
+        value_defence = DEFAULT_DEFENCE + randint(*self.RANGE_VALUE_DEFENCE)
+        return (f'{self.name} блокировал {value_defence} ед. урона.')
+
+    def special(self):
+        return (f'{self.name} применил свое умение'
+                f'"{self.SPECIAL_SKILL} {self.SPECIAL_BUFF}"')
+
+    def __str__(self) -> str:
+        return f'{self.__class__.__name__} - {self.BRIEF_DESC_CHAR_CLASS}.'
+        
+
+class Warrior(Character):
+    ...
+
+
+class Mage(Character):
+    ...
+
+
+class Healer(Character):
+    ...
+
 
 def attack(char_name: str, char_class: str) -> str:
     if char_class == 'warrior':
